@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-oppo",
+  "version": "1.0.0",
+  "description": "test to see if can install custom plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cb",
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-oppo" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>CordovaPluginOppo</name>
+  <js-module name="CordovaPluginOppo" src="www/CordovaPluginOppo.js">
+    <clobbers target="cordova.plugins.cordovaPluginOppo"/>
+  </js-module>
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="CordovaPluginOppo">
+        <param name="android-package" value="com.oppo.plugins.CordovaPluginOppo"/>
+      </feature>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE"/>
+    </config-file>
+    <source-file src="src/android/mcssdk-1.0.1.jar" target-dir="libs" />
+    <source-file src="src/android/CordovaPluginOppo.java" target-dir="src/com/oppo/plugins"/>
+    <source-file src="src/android/PushMessageService.java" target-dir="src/com/oppo/plugins"/>
+  </platform>
+</plugin>
