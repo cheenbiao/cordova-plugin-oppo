@@ -14,6 +14,17 @@
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE"/>
     </config-file>
+	<config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <service
+        android:enabled="true"
+        android:process=":pushMessageService"
+        android:name="com.oppo.plugins.PushMessageService"
+        android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
+        <intent-filter>
+          <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE"/>
+        </intent-filter>
+      </service>
+    </config-file>
     <source-file src="src/android/mcssdk-1.0.1.jar" target-dir="libs" />
     <source-file src="src/android/CordovaPluginOppo.java" target-dir="src/com/oppo/plugins"/>
     <source-file src="src/android/PushMessageService.java" target-dir="src/com/oppo/plugins"/>
