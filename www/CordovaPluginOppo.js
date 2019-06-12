@@ -16,8 +16,8 @@ module.exports = MYMATHFUNC1;*/
 var exec = require('cordova/exec');
 var CordovaPluginOppo = function() {}
 
-CordovaPluginOppo.prototype.init = function(successCallback, errorCallback) {
-  exec(successCallback, errorCallback, 'CordovaPluginOppo', "init", []);
+CordovaPluginOppo.prototype.init = function(args,successCallback, errorCallback) {
+  exec(successCallback, errorCallback, 'CordovaPluginOppo', "init", args);
 }
 CordovaPluginOppo.prototype.getRegister = function(args,successCallback,errorCallback) {
   exec(successCallback, errorCallback, 'CordovaPluginOppo', "getRegister", args);

@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="cordova-plugin-oppo" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>CordovaPluginOppo</name>
+  <preference name="APP_KEY"/>
+  <preference name="APP_SECRET" />
   <js-module name="CordovaPluginOppo" src="www/CordovaPluginOppo.js">
     <clobbers target="cordova.plugins.cordovaPluginOppo"/>
   </js-module>
@@ -16,8 +18,6 @@
     </config-file>
 	<config-file target="AndroidManifest.xml" parent="/manifest/application">
       <service
-        android:enabled="true"
-        android:process=":pushMessageService"
         android:name="com.oppo.plugins.PushMessageService"
         android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
         <intent-filter>
@@ -25,6 +25,8 @@
         </intent-filter>
       </service>
     </config-file>
+	<meta-data android:name="APP_KEY" android:value="$APP_KEY"></meta-data>
+    <meta-data android:name="APP_SECRET" android:value="$APP_SECRET"></meta-data>
     <source-file src="src/android/mcssdk-1.0.1.jar" target-dir="libs" />
     <source-file src="src/android/CordovaPluginOppo.java" target-dir="src/com/oppo/plugins"/>
     <source-file src="src/android/PushMessageService.java" target-dir="src/com/oppo/plugins"/>
