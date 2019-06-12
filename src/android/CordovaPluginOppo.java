@@ -15,7 +15,9 @@ import org.json.JSONObject;
  */
 public class CordovaPluginOppo extends CordovaPlugin {
 
-   private static CordovaPluginOppo instance;
+	private String appKey;
+	private String appSecret;
+    private static CordovaPluginOppo instance;
        private PushCallback mPushCallback = new PushAdapter() {
            @Override
            public void onRegister(int code, String s) {
@@ -33,6 +35,20 @@ public class CordovaPluginOppo extends CordovaPlugin {
        public CordovaPluginOppo(){
            instance = this;
        }
+	   
+	   @Override
+		public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+			PackageManager packageManager = cordova.getActivity().getPackageManager();
+			ApplicationInfo applicationInfo;
+			try {
+				applicationInfo = packageManager.getApplicationInfo(cordova.getActivity().getPackageName(), PackageManager.GET_META_DATA);
+					appKey = applicationInfo.metaData.getString("APP_KEY");
+					appSecret = applicationInfo.metaData.getString("APP_SECRET");
+			} catch (PackageManager.NameNotFoundException e) {
+				Toast.makeText(cordova.getActivity().getApplicationContext(), "推送服务初始化错误", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+		}
 
 
        public void onRegister(int code, String result){
@@ -71,7 +87,7 @@ public class CordovaPluginOppo extends CordovaPlugin {
        public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
            if("init".equals(action)){
              try{
-               PushManager.getInstance().register(this.cordova.getActivity(), args.getString(0), args.getString(1), instance.mPushCallback);
+               PushManager.getInstance().register(this.cordova.getActivity(), appKey, appSecret, instance.mPushCallback);
              }catch (Exception e){
                instance.onRegister(-1, e.getMessage());
              }
