@@ -15,10 +15,10 @@ import org.json.JSONObject;
  */
 public class CordovaPluginOppo extends CordovaPlugin {
 
-	private String appKey;
-	private String appSecret;
-    private static CordovaPluginOppo instance;
-       private PushCallback mPushCallback = new PushAdapter() {
+		private String appKey;
+		private String appSecret;
+		private static CordovaPluginOppo instance;
+        private PushCallback mPushCallback = new PushAdapter() {
            @Override
            public void onRegister(int code, String s) {
                instance.onRegister(code, s);
@@ -28,9 +28,7 @@ public class CordovaPluginOppo extends CordovaPlugin {
            public void onUnRegister(int code) {
                instance.onUnRegister(code);
            }
-
        };
-
 
        public CordovaPluginOppo(){
            instance = this;
@@ -41,7 +39,7 @@ public class CordovaPluginOppo extends CordovaPlugin {
 			PackageManager packageManager = cordova.getActivity().getPackageManager();
 			ApplicationInfo applicationInfo;
 			try {
-				applicationInfo = packageManager.getApplicationInfo(cordova.getActivity().getPackageName(), PackageManager.GET_META_DATA);
+					applicationInfo = packageManager.getApplicationInfo(cordova.getActivity().getPackageName(), PackageManager.GET_META_DATA);
 					appKey = applicationInfo.metaData.getString("APP_KEY");
 					appSecret = applicationInfo.metaData.getString("APP_SECRET");
 			} catch (PackageManager.NameNotFoundException e) {
@@ -53,17 +51,17 @@ public class CordovaPluginOppo extends CordovaPlugin {
 
        public void onRegister(int code, String result){
         try{
-             JSONObject jsonObject = new JSONObject();
-             jsonObject.put("code", code);
-             jsonObject.put("content", result);
-             String format = "window.plugins.cordovaPluginOppo.onRegister(%s);";
-             final String js = String.format(format, jsonObject.toString());
-             instance.cordova.getActivity().runOnUiThread(new Runnable() {
-                 @Override
-                 public void run() {
-                     instance.webView.loadUrl("javascript:" + js);
-                 }
-             });
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("code", code);
+				jsonObject.put("content", result);
+				String format = "window.plugins.cordovaPluginOppo.onRegister(%s);";
+				final String js = String.format(format, jsonObject.toString());
+				instance.cordova.getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						instance.webView.loadUrl("javascript:" + js);
+					}
+				});
            }catch(Exception ex){}
        }
 
