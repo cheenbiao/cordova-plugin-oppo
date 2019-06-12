@@ -9,7 +9,9 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONException;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.widget.Toast;
 /**
  * This class echoes a string called from JavaScript.
  */
