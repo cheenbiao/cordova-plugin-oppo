@@ -12,6 +12,10 @@
         <param name="android-package" value="com.oppo.plugins.CordovaPluginOppo"/>
       </feature>
     </config-file>
+    <config-file parent="/*" target="res/values/strings.xml">
+      <string name="OPPO_APP_KEY">$APP_KEY</string>
+      <string name="OPPO_APP_SECRET">$APP_SECRET</string>
+    </config-file>
     <config-file parent="/*" target="AndroidManifest.xml">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE"/>
@@ -25,8 +29,6 @@
         </intent-filter>
       </service>
     </config-file>
-	<meta-data android:name="APP_KEY" android:value="$APP_KEY"></meta-data>
-    <meta-data android:name="APP_SECRET" android:value="$APP_SECRET"></meta-data>
     <source-file src="src/android/mcssdk-1.0.1.jar" target-dir="libs" />
     <source-file src="src/android/CordovaPluginOppo.java" target-dir="src/com/oppo/plugins"/>
     <source-file src="src/android/PushMessageService.java" target-dir="src/com/oppo/plugins"/>

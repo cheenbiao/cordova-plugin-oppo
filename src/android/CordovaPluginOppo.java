@@ -6,6 +6,8 @@ import com.coloros.mcssdk.callback.PushCallback;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaArgs;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,20 +37,8 @@ public class CordovaPluginOppo extends CordovaPlugin {
        public CordovaPluginOppo(){
            instance = this;
        }
-	   
-	   @Override
-		public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-			PackageManager packageManager = cordova.getActivity().getPackageManager();
-			ApplicationInfo applicationInfo;
-			try {
-					applicationInfo = packageManager.getApplicationInfo(cordova.getActivity().getPackageName(), PackageManager.GET_META_DATA);
-					appKey = applicationInfo.metaData.getString("APP_KEY");
-					appSecret = applicationInfo.metaData.getString("APP_SECRET");
-			} catch (PackageManager.NameNotFoundException e) {
-				Toast.makeText(cordova.getActivity().getApplicationContext(), "推送服务初始化错误", Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			}
-		}
+
+
 
 
        public void onRegister(int code, String result){
@@ -87,6 +77,12 @@ public class CordovaPluginOppo extends CordovaPlugin {
        public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
            if("init".equals(action)){
              try{
+               if(null == appKey){
+                  appKey = cordova.getActivity().getApplicationContext().getResources().getString(io.ionic.starter.R.string.OPPO_APP_KEY);
+               }
+               if(null == appSecret){
+                   appSecret = cordova.getActivity().getApplicationContext().getResources().getString(io.ionic.starter.R.string.OPPO_APP_SECRET);
+               }
                PushManager.getInstance().register(this.cordova.getActivity(), appKey, appSecret, instance.mPushCallback);
              }catch (Exception e){
                instance.onRegister(-1, e.getMessage());
